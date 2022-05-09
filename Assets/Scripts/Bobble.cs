@@ -8,8 +8,8 @@ public class Bobble : MonoBehaviour
     public float b;
     public float speedx;
     public float speedz;
-    public MeshFilter MeshToBobble;
-    public Vector3[] verticies;
+    public MeshFilter WaveMesh;
+    Vector3[] verticies;
 
     private void Start()
     {
@@ -21,16 +21,14 @@ public class Bobble : MonoBehaviour
     private void Update()
     {
         List<Vector3> newVerticies = new List<Vector3>();
-        verticies = MeshToBobble.mesh.vertices;
+        verticies = WaveMesh.mesh.vertices;
         for (int i = 0; i < verticies.Length; i++)
         {
             verticies[i].y = a * Mathf.Sin(b * (verticies[i].x + itex)) + a * Mathf.Sin(b * (verticies[i].z + itez));
             newVerticies.Add(verticies[i]);
         }
-        MeshToBobble.mesh.SetVertices(newVerticies);
-        MeshToBobble.GetComponent<MeshCollider>().sharedMesh = MeshToBobble.mesh;
-
-        transform.position = new Vector3(newVerticies[200].x, newVerticies[200].y, newVerticies[200].z);
+        WaveMesh.mesh.SetVertices(newVerticies);
+        WaveMesh.GetComponent<MeshCollider>().sharedMesh = WaveMesh.mesh;
 
         itex += speedx * Time.deltaTime;
         itez += speedz * Time.deltaTime;
