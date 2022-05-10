@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public Rigidbody ball;
     public float speed;
     public float jumpForce;
-    public bool CanJump;
+    bool CanJump;
 
     void Start()
     {

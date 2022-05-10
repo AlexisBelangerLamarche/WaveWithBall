@@ -9,9 +9,7 @@ public class TeleportScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
         other.gameObject.transform.position = teleportEnd.transform.position;
-
     }
 
 }
