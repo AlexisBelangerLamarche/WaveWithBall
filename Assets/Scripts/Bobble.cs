@@ -16,9 +16,14 @@ public class Bobble : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        UpdateMesh(CalculateWaveVertex());
+    }
+
     float itex;
     float itez;
-    private void Update()
+    List<Vector3> CalculateWaveVertex()
     {
         List<Vector3> newVerticies = new List<Vector3>();
         verticies = WaveMesh.mesh.vertices;
@@ -27,10 +32,18 @@ public class Bobble : MonoBehaviour
             verticies[i].y = a * Mathf.Sin(b * (verticies[i].x + itex)) + a * Mathf.Sin(b * (verticies[i].z + itez));
             newVerticies.Add(verticies[i]);
         }
-        WaveMesh.mesh.SetVertices(newVerticies);
-        WaveMesh.GetComponent<MeshCollider>().sharedMesh = WaveMesh.mesh;
+
 
         itex += speedx * Time.deltaTime;
         itez += speedz * Time.deltaTime;
+
+        return newVerticies;
+    }
+
+    void UpdateMesh(List<Vector3> vert)
+    {
+        WaveMesh.mesh.SetVertices(vert);
+
+        WaveMesh.GetComponent<MeshCollider>().sharedMesh = WaveMesh.mesh;
     }
 }
